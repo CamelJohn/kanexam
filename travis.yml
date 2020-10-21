@@ -1,0 +1,16 @@
+sudo: required
+services: 
+  - docker
+
+before_install:
+  - docker build -t testme -f Dockerfile.dev .
+
+deploy:
+  provider: elasticbeanstalk
+  region: "eu-central-1"
+  app: "exam"
+  env: "Docker-env"
+  bucket_name: "elasticbeanstalk-eu-central-1-231122081767"
+  path: "exam"
+  on:
+    branch: master
